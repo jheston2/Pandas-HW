@@ -1,29 +1,23 @@
-import os
-import csv
 import pandas as pd
 import numpy as np
 
-csvpath = os.path.join("purchase_data.csv")
-df = []
-dic = {}
+# watch first half hour of class!
 
-with open(csvpath, "r") as csvfile:
-    csvreader = csv.reader(csvfile,delimiter=",")
-    for row in csvreader:
-        # df.append(row)
-        for k,v in dic:
-            k = row[0]
-            v = row[1]
+df = pd.read_csv("purchase_data.csv")
 
-    # print(df[5])
-    print(dic)
+df.head()
 
+#Homework notes:
+# df.groupby('SN').agg({'Price:{'sum'},'Purchase ID':'count'})
+# summary.columns = [' '.join(col).strip() for col in summary.columns.value]}
+# summary.sort_values(by='Price_sum',ascending=False.head(7))
 
+# out = df.groupby('Age Range').agg({"Price:": "sum", "SN":"nunique"})
+# out['Avg Total per Person'] = out.Price / out.SN #rowwise operation here
 
+#most profitable
+df.groupby(['Item Name', 'Item ID']).agg({"Purchase ID":"count","Price": ["sum","min"]
+})
 
+popular.columns = ['_'.join(col).strip() for col in popular.columns.values]
 
-
-        # if row[0] not in dic.keys():
-        #     dic[row[0]]=1
-        # else:
-        #     dic[row[0]]+=1
